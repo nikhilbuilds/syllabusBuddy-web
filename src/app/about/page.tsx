@@ -1,26 +1,9 @@
 "use client";
 
-import {
-  Box,
-  Container,
-  Typography,
-  Grid,
-  Card,
-  CardContent,
-  Avatar,
-} from "@mui/material";
+import { Box, Container, Typography, Grid } from "@mui/material";
 import Image from "next/image";
 
 export default function AboutPage() {
-  const team = [
-    {
-      name: "Nikhil",
-      role: "Founder & Developer",
-      image: "/team/nikhil.jpg",
-    },
-    // Add more team members as needed
-  ];
-
   return (
     <Box sx={{ backgroundColor: "#010f0f", minHeight: "100vh", pt: 8 }}>
       <Container maxWidth="lg">
@@ -45,10 +28,10 @@ export default function AboutPage() {
               lineHeight: 1.6,
             }}
           >
-            At SyllabusBuddy, we're on a mission to revolutionize how students
-            interact with their course syllabi. We believe that every student
-            deserves a personalized learning experience that adapts to their
-            unique needs and learning style.
+            At SyllabusBuddy, we&apos;re on a mission to revolutionize how
+            students interact with their course syllabi. We believe that every
+            student deserves a personalized learning experience that adapts to
+            their unique needs and learning style.
           </Typography>
         </Box>
 
@@ -85,7 +68,7 @@ export default function AboutPage() {
                   lineHeight: 1.8,
                 }}
               >
-                Today, we're proud to help students across the globe stay
+                Today, we&apos;re proud to help students across the globe stay
                 organized, meet their academic goals, and make the most of their
                 educational journey.
               </Typography>
@@ -110,71 +93,6 @@ export default function AboutPage() {
             </Grid>
           </Grid>
         </Box>
-
-        {/* Team Section */}
-        {/* <Box>
-          <Typography
-            variant="h3"
-            sx={{
-              color: "white",
-              mb: 6,
-              textAlign: "center",
-              fontWeight: 700,
-            }}
-          >
-            Meet Our Team
-          </Typography>
-          <Grid container spacing={4} justifyContent="center">
-            {team.map((member, index) => (
-              <Grid size={{ xs: 12, sm: 6, md: 4 }} key={index}>
-                <Card
-                  sx={{
-                    backgroundColor: "#010f0f",
-                    border: "1px solid rgba(15, 243, 103, 0.2)",
-                    borderRadius: 2,
-                    height: "100%",
-                    transition: "transform 0.2s",
-                    "&:hover": {
-                      transform: "translateY(-4px)",
-                      borderColor: "#0ff367",
-                    },
-                  }}
-                >
-                  <CardContent sx={{ textAlign: "center" }}>
-                    <Avatar
-                      src={member.image}
-                      alt={member.name}
-                      sx={{
-                        width: 120,
-                        height: 120,
-                        mx: "auto",
-                        mb: 2,
-                        border: "2px solid #0ff367",
-                      }}
-                    />
-                    <Typography
-                      variant="h5"
-                      sx={{
-                        color: "white",
-                        mb: 1,
-                        fontWeight: 600,
-                      }}
-                    >
-                      {member.name}
-                    </Typography>
-                    <Typography
-                      sx={{
-                        color: "rgba(255, 255, 255, 0.8)",
-                      }}
-                    >
-                      {member.role}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </Box> */}
       </Container>
     </Box>
   );

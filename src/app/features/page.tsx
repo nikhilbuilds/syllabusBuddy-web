@@ -7,7 +7,6 @@ import {
   Grid,
   Card,
   CardContent,
-  useTheme,
 } from "@mui/material";
 import {
   Upload as UploadIcon,
@@ -19,8 +18,6 @@ import {
 } from "@mui/icons-material";
 
 export default function FeaturesPage() {
-  const theme = useTheme();
-
   const features = [
     {
       icon: <UploadIcon sx={{ fontSize: 40, color: "#0ff367" }} />,
