@@ -1,17 +1,95 @@
 "use client";
 
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Typography, Stack } from "@mui/material";
+import Link from "next/link";
 
 export default function Footer() {
+  const menuItems = [
+    { text: "Features", href: "/features" },
+    { text: "About", href: "/about" },
+    { text: "Contact", href: "/contact" },
+  ];
+
   return (
     <Box
       component="footer"
-      sx={{ backgroundColor: "#010f0f", py: 3, mt: "auto" }}
+      sx={{ bgcolor: "background.paper", py: { xs: 4, md: 6 } }}
     >
       <Container maxWidth="lg">
-        <Typography variant="body2" color="white" align="center">
-          © {new Date().getFullYear()} SyllabusBuddy. All rights reserved.
-        </Typography>
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", md: "repeat(3, 1fr)" },
+            gap: 4,
+          }}
+        >
+          <Box>
+            <Typography
+              variant="h6"
+              color="text.primary"
+              gutterBottom
+              sx={{ fontWeight: 600 }}
+            >
+              SyllabusBuddy
+            </Typography>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{ lineHeight: 1.6 }}
+            >
+              Your AI-powered academic companion for better organization and
+              success.
+            </Typography>
+          </Box>
+          <Box>
+            <Typography
+              variant="h6"
+              color="text.primary"
+              gutterBottom
+              sx={{ fontWeight: 600 }}
+            >
+              Quick Links
+            </Typography>
+            <Stack spacing={1}>
+              {menuItems.map((item) => (
+                <Link
+                  key={item.text}
+                  href={item.href}
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    sx={{
+                      "&:hover": {
+                        color: "primary.main",
+                      },
+                      transition: "color 0.2s ease-in-out",
+                    }}
+                  >
+                    {item.text}
+                  </Typography>
+                </Link>
+              ))}
+            </Stack>
+          </Box>
+          <Box>
+            <Typography
+              variant="h6"
+              color="text.primary"
+              gutterBottom
+              sx={{ fontWeight: 600 }}
+            >
+              Contact
+            </Typography>
+            <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+              Email: support@syllabusbuddy.com
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Phone: 8528907496
+            </Typography>
+          </Box>
+        </Box>
       </Container>
     </Box>
   );

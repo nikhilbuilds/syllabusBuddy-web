@@ -59,7 +59,7 @@ export default function FeaturesPage() {
 
   return (
     <Box sx={{ backgroundColor: "#010f0f", minHeight: "100vh", pt: 8 }}>
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{ pb: { xs: 6, md: 10 } }}>
         <Typography
           variant="h2"
           sx={{
@@ -95,6 +95,7 @@ export default function FeaturesPage() {
                   borderRadius: 2,
                   height: "100%",
                   transition: "transform 0.2s",
+                  mb: { xs: 3, md: 0 },
                   "&:hover": {
                     transform: "translateY(-4px)",
                     borderColor: "#0ff367",

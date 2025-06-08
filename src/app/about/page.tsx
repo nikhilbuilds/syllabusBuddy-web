@@ -6,7 +6,7 @@ import Image from "next/image";
 export default function AboutPage() {
   return (
     <Box sx={{ backgroundColor: "#010f0f", minHeight: "100vh", pt: 8 }}>
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{ pb: { xs: 6, md: 10 } }}>
         {/* Mission Section */}
         <Box sx={{ mb: 12, textAlign: "center" }}>
           <Typography
