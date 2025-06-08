@@ -7,7 +7,6 @@ import {
   Card,
   CardContent,
   IconButton,
-  useTheme,
 } from "@mui/material";
 import {
   Phone as PhoneIcon,
@@ -16,11 +15,9 @@ import {
 } from "@mui/icons-material";
 
 export default function ContactPage() {
-  const theme = useTheme();
-
   const contactInfo = {
-    phone: "+918528907496", // Replace with your actual phone number
-    email: "contact@syllabusbuddy.com", // Replace with your actual email
+    phone: "+918528907496",
+    email: "support@syllabusbuddy.com",
   };
 
   const handlePhoneClick = () => {
