@@ -8,52 +8,50 @@ import {
   Card,
   CardContent,
 } from "@mui/material";
-import {
-  Upload as UploadIcon,
-  Analytics as AnalyticsIcon,
-  CalendarToday as CalendarIcon,
-  Settings as SettingsIcon,
-  School as SchoolIcon,
-  AutoGraph as AutoGraphIcon,
-} from "@mui/icons-material";
+import DescriptionIcon from "@mui/icons-material/Description";
+import QuizIcon from "@mui/icons-material/Quiz";
+import WhatshotIcon from "@mui/icons-material/Whatshot";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import EventRepeatIcon from "@mui/icons-material/EventRepeat";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 
 export default function FeaturesPage() {
   const features = [
     {
-      icon: <UploadIcon sx={{ fontSize: 40, color: "#0ff367" }} />,
-      title: "Easy Syllabus Upload",
+      icon: <DescriptionIcon sx={{ fontSize: 40, color: "#0ff367" }} />,
+      title: "Syllabus Parsing",
       description:
-        "Simply upload your course syllabus in any format, and our AI will automatically extract and organize all the important information.",
+        "Upload your course syllabus in any format. Our AI instantly extracts topics, milestones, and deadlines so you can focus on studying.",
     },
     {
-      icon: <SchoolIcon sx={{ fontSize: 40, color: "#0ff367" }} />,
-      title: "Smart Content Organization",
+      icon: <QuizIcon sx={{ fontSize: 40, color: "#0ff367" }} />,
+      title: "Quiz Generator",
       description:
-        "Your syllabus is transformed into an interactive learning plan with clear milestones, deadlines, and study recommendations.",
+        "Create daily quizzes automatically aligned with your topics to make learning interactive and fun.",
     },
     {
-      icon: <CalendarIcon sx={{ fontSize: 40, color: "#0ff367" }} />,
-      title: "Intelligent Scheduling",
+      icon: <WhatshotIcon sx={{ fontSize: 40, color: "#0ff367" }} />,
+      title: "Streak Tracker",
       description:
-        "Get personalized study schedules that adapt to your learning pace and help you stay on track with your coursework.",
+        "Keep your motivation high with streaks that record your consistent progress.",
     },
     {
-      icon: <AnalyticsIcon sx={{ fontSize: 40, color: "#0ff367" }} />,
-      title: "Progress Tracking",
+      icon: <BarChartIcon sx={{ fontSize: 40, color: "#0ff367" }} />,
+      title: "Progress Analytics",
       description:
-        "Monitor your learning progress with detailed analytics and insights to help you identify areas that need more attention.",
+        "Visual dashboards to help you track strengths, weaknesses, and areas that need more attention.",
     },
     {
-      icon: <AutoGraphIcon sx={{ fontSize: 40, color: "#0ff367" }} />,
-      title: "AI-Powered Recommendations",
+      icon: <EventRepeatIcon sx={{ fontSize: 40, color: "#0ff367" }} />,
+      title: "Revision Planner",
       description:
-        "Receive personalized study recommendations and resources based on your learning style and course requirements.",
+        "AI-powered reminders and study plans to ensure you never miss an important topic.",
     },
     {
-      icon: <SettingsIcon sx={{ fontSize: 40, color: "#0ff367" }} />,
-      title: "Customizable Experience",
+      icon: <EmojiEventsIcon sx={{ fontSize: 40, color: "#0ff367" }} />,
+      title: "Gamification & Rewards",
       description:
-        "Tailor your learning experience with customizable settings, notifications, and study preferences.",
+        "Earn badges, milestones, and unlock achievements as you complete your goals.",
     },
   ];
 
@@ -81,8 +79,7 @@ export default function FeaturesPage() {
             mx: "auto",
           }}
         >
-          Discover how SyllabusBuddy transforms your academic experience with
-          powerful features designed to enhance your learning journey.
+          Features Designed to Elevate Your Learning
         </Typography>
 
         <Grid container spacing={4}>

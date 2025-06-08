@@ -9,17 +9,49 @@ import {
   CardContent,
   Stack,
 } from "@mui/material";
-import {
-  Upload as UploadIcon,
-  Analytics as AnalyticsIcon,
-  CalendarToday as CalendarIcon,
-  Settings as SettingsIcon,
-} from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
+import QuizIcon from "@mui/icons-material/Quiz";
+import WhatshotIcon from "@mui/icons-material/Whatshot";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import EmojiObjectsIcon from "@mui/icons-material/EmojiObjects";
 
 export default function LandingPage() {
+  const features = [
+    {
+      icon: <QuizIcon sx={{ fontSize: 40, color: "#0ff367" }} />,
+      title: "Daily Quizzes",
+      description:
+        "Reinforce learning every day with quizzes tailored to your syllabus topics.",
+    },
+    {
+      icon: <WhatshotIcon sx={{ fontSize: 40, color: "#0ff367" }} />,
+      title: "Revision Streaks",
+      description:
+        "Stay motivated by building streaks that track your daily progress.",
+    },
+    {
+      icon: <BarChartIcon sx={{ fontSize: 40, color: "#0ff367" }} />,
+      title: "Progress Tracker",
+      description:
+        "Visualize your strengths and weaknesses with interactive dashboards.",
+    },
+    {
+      icon: <CloudUploadIcon sx={{ fontSize: 40, color: "#0ff367" }} />,
+      title: "Smart Upload",
+      description:
+        "Upload any syllabus—PDF, DOCX, or text—and let AI extract key topics instantly.",
+    },
+    {
+      icon: <EmojiObjectsIcon sx={{ fontSize: 40, color: "#0ff367" }} />,
+      title: "Personalized Recommendations",
+      description:
+        "Get AI-powered suggestions for quizzes, revision topics, and next steps based on your progress.",
+    },
+  ];
+
   return (
     <>
       <Head>
@@ -75,7 +107,7 @@ export default function LandingPage() {
                       lineHeight: 1.2,
                     }}
                   >
-                    Your AI-Powered Syllabus Management Assistant
+                    Your Smart Learning Companion
                   </Typography>
                   <Typography
                     variant="h5"
@@ -86,8 +118,9 @@ export default function LandingPage() {
                       lineHeight: 1.5,
                     }}
                   >
-                    Transform your academic experience with smart organization
-                    and AI-powered insights
+                    Transform your academic experience with daily quizzes,
+                    personalized revision plans, and streak-based
+                    motivation—powered by AI to keep you on track.
                   </Typography>
                   <Stack direction="row" spacing={2}>
                     <Button
@@ -157,72 +190,115 @@ export default function LandingPage() {
             </Typography>
             <Box
               sx={{
-                display: "grid",
-                gridTemplateColumns: {
-                  xs: "1fr",
-                  sm: "1fr 1fr",
-                  md: "repeat(4, 1fr)",
-                },
+                display: "flex",
+                flexDirection: "column",
                 gap: 4,
+                alignItems: "center",
               }}
             >
-              {[
-                {
-                  icon: <UploadIcon sx={{ fontSize: 40 }} />,
-                  title: "Smart Upload",
-                  description:
-                    "Upload your syllabi in any format and let our AI extract key information automatically.",
-                },
-                {
-                  icon: <AnalyticsIcon sx={{ fontSize: 40 }} />,
-                  title: "AI Analysis",
-                  description:
-                    "Get intelligent insights and recommendations based on your course requirements.",
-                },
-                {
-                  icon: <CalendarIcon sx={{ fontSize: 40 }} />,
-                  title: "Smart Calendar",
-                  description:
-                    "Automatically sync important dates and deadlines with your preferred calendar.",
-                },
-                {
-                  icon: <SettingsIcon sx={{ fontSize: 40 }} />,
-                  title: "Customizable",
-                  description:
-                    "Personalize your experience with custom categories, tags, and organization methods.",
-                },
-              ].map((feature, index) => (
-                <Card
-                  key={index}
-                  sx={{
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    transition: "all 0.3s ease-in-out",
-                    "&:hover": {
-                      transform: "translateY(-8px)",
-                      boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
-                    },
-                  }}
-                >
-                  <CardContent sx={{ flexGrow: 1, textAlign: "center", p: 3 }}>
-                    <Box sx={{ color: "primary.main", mb: 2 }}>
-                      {feature.icon}
-                    </Box>
-                    <Typography
-                      variant="h5"
-                      component="h3"
-                      gutterBottom
-                      sx={{ fontWeight: 600 }}
+              {/* First row: 3 cards */}
+              <Box
+                sx={{
+                  display: "grid",
+                  gridTemplateColumns: {
+                    xs: "1fr",
+                    sm: "1fr",
+                    md: "repeat(3, 1fr)",
+                  },
+                  gap: 4,
+                  width: "100%",
+                }}
+              >
+                {features.slice(0, 3).map((feature, index) => (
+                  <Card
+                    key={index}
+                    sx={{
+                      height: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                      transition: "all 0.3s ease-in-out",
+                      "&:hover": {
+                        transform: "translateY(-8px)",
+                        boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
+                      },
+                    }}
+                  >
+                    <CardContent
+                      sx={{ flexGrow: 1, textAlign: "center", p: 3 }}
                     >
-                      {feature.title}
-                    </Typography>
-                    <Typography color="text.secondary" sx={{ lineHeight: 1.6 }}>
-                      {feature.description}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              ))}
+                      <Box sx={{ color: "primary.main", mb: 2 }}>
+                        {feature.icon}
+                      </Box>
+                      <Typography
+                        variant="h5"
+                        component="h3"
+                        gutterBottom
+                        sx={{ fontWeight: 600 }}
+                      >
+                        {feature.title}
+                      </Typography>
+                      <Typography
+                        color="text.secondary"
+                        sx={{ lineHeight: 1.6 }}
+                      >
+                        {feature.description}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                ))}
+              </Box>
+              {/* Second row: 2 cards, centered */}
+              <Box
+                sx={{
+                  display: "grid",
+                  gridTemplateColumns: {
+                    xs: "1fr",
+                    sm: "1fr",
+                    md: "repeat(2, 1fr)",
+                  },
+                  gap: 4,
+                  width: { xs: "100%", md: "66.66%" },
+                  mx: { md: "auto" },
+                }}
+              >
+                {features.slice(3).map((feature, index) => (
+                  <Card
+                    key={index}
+                    sx={{
+                      height: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                      transition: "all 0.3s ease-in-out",
+                      "&:hover": {
+                        transform: "translateY(-8px)",
+                        boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
+                      },
+                    }}
+                  >
+                    <CardContent
+                      sx={{ flexGrow: 1, textAlign: "center", p: 3 }}
+                    >
+                      <Box sx={{ color: "primary.main", mb: 2 }}>
+                        {feature.icon}
+                      </Box>
+                      <Typography
+                        variant="h5"
+                        component="h3"
+                        gutterBottom
+                        sx={{ fontWeight: 600 }}
+                      >
+                        {feature.title}
+                      </Typography>
+                      <Typography
+                        color="text.secondary"
+                        sx={{ lineHeight: 1.6 }}
+                      >
+                        {feature.description}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                ))}
+              </Box>
             </Box>
           </Container>
 
@@ -275,8 +351,9 @@ export default function LandingPage() {
                       color: "rgba(255, 255, 255, 0.9)",
                     }}
                   >
-                    Join thousands of students who are already using
-                    SyllabusBuddy to enhance their learning experience.
+                    Be among the first to revolutionize your learning journey
+                    with SyllabusBuddy. Download the app today and start
+                    building your study streak!
                   </Typography>
                   <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
                     <a

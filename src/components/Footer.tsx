@@ -37,8 +37,8 @@ export default function Footer() {
               color="text.secondary"
               sx={{ lineHeight: 1.6 }}
             >
-              Your AI-powered academic companion for better organization and
-              success.
+              Your AI-powered learning companion for better organization, daily
+              quizzes, and progress tracking.
             </Typography>
           </Box>
           <Box>

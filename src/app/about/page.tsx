@@ -28,10 +28,9 @@ export default function AboutPage() {
               lineHeight: 1.6,
             }}
           >
-            At SyllabusBuddy, we&apos;re on a mission to revolutionize how
-            students interact with their course syllabi. We believe that every
-            student deserves a personalized learning experience that adapts to
-            their unique needs and learning style.
+            At SyllabusBuddy, our mission is to revolutionize the way students
+            engage with their syllabus. We believe learning should be
+            personalized, interactive, and rewarding—not just a checklist.
           </Typography>
         </Box>
 
@@ -56,21 +55,10 @@ export default function AboutPage() {
                   lineHeight: 1.8,
                 }}
               >
-                SyllabusBuddy was born from a simple observation: students often
-                struggle to keep track of their course requirements and
-                deadlines. We saw an opportunity to leverage AI technology to
-                transform static syllabi into dynamic, interactive learning
-                companions.
-              </Typography>
-              <Typography
-                sx={{
-                  color: "rgba(255, 255, 255, 0.8)",
-                  lineHeight: 1.8,
-                }}
-              >
-                Today, we&apos;re proud to help students across the globe stay
-                organized, meet their academic goals, and make the most of their
-                educational journey.
+                Born from the real struggles of students trying to manage their
+                syllabus, SyllabusBuddy transforms static syllabi into dynamic
+                learning plans with quizzes, streaks, and progress tracking.
+                We&apos;re here to make studying smarter, not harder.
               </Typography>
             </Grid>
             <Grid size={{ xs: 12, md: 6 }}>
