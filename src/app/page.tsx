@@ -564,7 +564,7 @@ export default function LandingPage() {
                 </Typography>
               </Box>
             </Box>
-            <Box
+            {/* <Box
               sx={{
                 mt: 4,
                 pt: 4,
@@ -575,7 +575,7 @@ export default function LandingPage() {
               <Typography variant="body2" color="text.secondary" align="center">
                 © {new Date().getFullYear()} SyllabusBuddy. All rights reserved.
               </Typography>
-            </Box>
+            </Box> */}
           </Container>
         </Box>
       </Box>
