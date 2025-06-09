@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "SyllabusBuddy - Your AI Learning Companion",
-  description:
-    "Transform your course syllabi into interactive learning plans with AI-powered organization and scheduling.",
+  title: "Syllabus Buddy",
+  description: "Your comprehensive syllabus management solution",
   icons: {
     icon: [
       {
