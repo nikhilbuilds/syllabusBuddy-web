@@ -53,4 +53,9 @@ export const submitCurrentAffairs = async (currentAffairs: CurrentAffair[]) => {
   return response.data;
 };
 
+export const subscribeUser = async (email: string) => {
+  const response = await api.post("/users/subscribe", { email });
+  return response.data;
+};
+
 export default api;
