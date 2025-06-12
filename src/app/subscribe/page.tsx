@@ -69,7 +69,7 @@ export default function SubscribePage() {
           lineHeight: 1.2,
         }}
       >
-        Get Ready to Revolutionize Your Study Routine!
+        Revolutionize Your Study Routine!
       </Box>
       <Box
         component="form"
@@ -88,7 +88,7 @@ export default function SubscribePage() {
       >
         <TextField
           type="email"
-          placeholder="Enter your email to claim your free 6-month trial"
+          placeholder="Your email for a free 6-month trial"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -109,7 +109,7 @@ export default function SubscribePage() {
             minWidth: { sm: 300 },
             input: {
               color: "#fff",
-              fontSize: "1.1rem",
+              fontSize: { xs: "1rem", sm: "1.1rem" },
               padding: "0",
             },
           }}
@@ -124,7 +124,7 @@ export default function SubscribePage() {
             color: "#010f0f",
             borderRadius: "8px",
             fontWeight: 600,
-            fontSize: "1.1rem",
+            fontSize: { xs: "1rem", sm: "1.1rem" },
             padding: "0.75rem 1.5rem",
             "&:hover": { background: "#00e05c" },
           }}
