@@ -8,6 +8,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Box } from "@mui/material";
+import { PostHogProvider } from "@/components/PostHogProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,14 +20,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Navbar />
-          <Box component="main" sx={{ pt: 8, backgroundColor: "#010f0f" }}>
-            {children}
-          </Box>
-          <Footer />
-        </ThemeProvider>
+        <PostHogProvider>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Navbar />
+            <Box component="main" sx={{ pt: 8, backgroundColor: "#010f0f" }}>
+              {children}
+            </Box>
+            <Footer />
+          </ThemeProvider>
+        </PostHogProvider>
       </body>
     </html>
   );

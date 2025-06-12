@@ -13,6 +13,7 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { subscribeUser } from "@/utils/api";
 import { AxiosError } from "axios";
+import posthog from "posthog-js";
 
 export default function SubscribePage() {
   const [email, setEmail] = useState("");
@@ -24,6 +25,7 @@ export default function SubscribePage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
+    posthog.capture("waitlist_joined", { email });
     try {
       await subscribeUser(email);
       setStatus("success");
