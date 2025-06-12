@@ -14,13 +14,13 @@ import Link from "next/link";
 
 function VerifyEmailContent() {
   const searchParams = useSearchParams();
-  const token = searchParams.get("token");
+
+  const token = searchParams?.get("token") || null;
 
   const [status, setStatus] = useState<"loading" | "success" | "error">(
     "loading"
   );
   const [message, setMessage] = useState("");
-  const [isRedirecting, setIsRedirecting] = useState(false);
 
   useEffect(() => {
     if (!token) {
@@ -34,17 +34,6 @@ function VerifyEmailContent() {
         const response = await verifyEmail(token);
         setStatus("success");
         setMessage(response.message || "Email verified successfully!");
-
-        // Store token and user data
-        // localStorage.setItem("token", response.token);
-        // localStorage.setItem("user", JSON.stringify(response.user));
-
-        // Redirect user after a delay
-        // setTimeout(() => {
-        //   setIsRedirecting(true);
-        //   // TODO: a confirmation from user where to redirect to
-        //   //   window.location.href = "/admin/dashboard"; // or wherever user should go
-        // }, 3000);
       } catch (error) {
         setStatus("error");
         if (error instanceof AxiosError) {
@@ -79,11 +68,19 @@ function VerifyEmailContent() {
             <Typography variant="h5" sx={{ mt: 2, color: "#fff" }}>
               {message}
             </Typography>
-            <Typography sx={{ mt: 1, color: "rgba(255,255,255,0.8)" }}>
-              {isRedirecting
-                ? "Redirecting..."
-                : "You will be redirected shortly."}
-            </Typography>
+            <Link href={`syllabusbuddy://login`} passHref>
+              <Button
+                variant="contained"
+                sx={{
+                  mt: 2,
+                  background: "#0ff367",
+                  color: "#010f0f",
+                  "&:hover": { background: "#00e05c" },
+                }}
+              >
+                Open in App
+              </Button>
+            </Link>
           </>
         );
       case "error":
