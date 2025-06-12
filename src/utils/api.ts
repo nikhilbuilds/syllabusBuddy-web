@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/api/v1",
+  baseURL: "https://api.syllabusbuddy.com/api/v1",
   withCredentials: true,
 });
 
@@ -55,6 +55,11 @@ export const submitCurrentAffairs = async (currentAffairs: CurrentAffair[]) => {
 
 export const subscribeUser = async (email: string) => {
   const response = await api.post("/users/subscribe", { email });
+  return response.data;
+};
+
+export const verifyEmail = async (token: string) => {
+  const response = await api.post("/onboarding/verify-email", { token });
   return response.data;
 };
 
