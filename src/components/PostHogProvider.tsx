@@ -6,26 +6,29 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { Suspense } from "react";
 
-if (typeof window !== "undefined") {
+if (
+  typeof window !== "undefined" &&
+  window.location.hostname !== "localhost" &&
+  window.location.hostname !== "127.0.0.1" &&
+  process.env.NEXT_PUBLIC_ENABLE_POSTHOG === "true"
+) {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY || "", {
     api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://app.posthog.com",
     capture_pageview: false, // We'll handle this manually
   });
 }
 
-console.log(
-  "process.env.NEXT_PUBLIC_POSTHOG_KEY",
-  process.env.NEXT_PUBLIC_POSTHOG_KEY
-);
-
 function PostHogPageview() {
   const pathname = usePathname();
 
   useEffect(() => {
     // Skip analytics for admin pages
+    console.log("pathname", pathname);
     if (pathname?.startsWith("/admin")) {
+      console.log("skipping analytics for admin page");
       return;
     }
+    console.log("capturing pageview for", pathname);
 
     if (pathname) {
       let url = window.origin + pathname;

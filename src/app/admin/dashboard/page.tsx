@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
+import { useAuth } from "@/hooks/useAuth";
 import {
   logout,
   submitCurrentAffairs,
@@ -41,17 +43,41 @@ interface CurrentAffair {
   isImportant?: boolean;
 }
 
-export default function AdminDashboard() {
-  const router = useRouter();
-  const [file, setFile] = useState<File | null>(null);
-  const [uploading, setUploading] = useState(false);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+function AdminDashboardComponent() {
+  const { isAuthenticated, isLoading, isMounted } = useAuth();
   const [currentAffairs, setCurrentAffairs] = useState<CurrentAffair[]>([]);
+  const [file, setFile] = useState<File | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadError, setUploadError] = useState("");
+  const [uploadSuccess, setUploadSuccess] = useState("");
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [editingAffair, setEditingAffair] = useState<CurrentAffair | null>(
     null
   );
-  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const router = useRouter();
+
+  // Don't render anything until mounted or while checking auth
+  if (!isMounted || isLoading) {
+    return (
+      <Container maxWidth="lg" sx={{ py: 4 }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            minHeight: "50vh",
+          }}
+        >
+          <CircularProgress sx={{ color: "#0ff367" }} />
+        </Box>
+      </Container>
+    );
+  }
+
+  // If not authenticated, show nothing (useAuth will handle redirect)
+  if (!isAuthenticated) {
+    return null;
+  }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -62,17 +88,17 @@ export default function AdminDashboard() {
   const handleUpload = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!file) {
-      setError("Please select a file");
+      setUploadError("Please select a file");
       return;
     }
 
-    setUploading(true);
-    setError("");
-    setSuccess("");
+    setIsUploading(true);
+    setUploadError("");
+    setUploadSuccess("");
 
     try {
       const response = await uploadCurrentAffairs(file);
-      setSuccess(response.message);
+      setUploadSuccess(response.message);
       if (response.currentAffairs) {
         setCurrentAffairs(
           response.currentAffairs.map((affair: CurrentAffair) => ({
@@ -84,9 +110,9 @@ export default function AdminDashboard() {
       }
       setFile(null);
     } catch (err) {
-      setError("Failed to upload file");
+      setUploadError("Failed to upload file");
     } finally {
-      setUploading(false);
+      setIsUploading(false);
     }
   };
 
@@ -135,9 +161,15 @@ export default function AdminDashboard() {
     await submitCurrentAffairs(currentAffairs);
   };
 
-  const handleLogout = () => {
-    logout();
-    router.push("/admin/login");
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error("Logout error:", error);
+    } finally {
+      // Always redirect to login regardless of logout API result
+      router.push("/admin/login");
+    }
   };
 
   return (
@@ -207,26 +239,26 @@ export default function AdminDashboard() {
             </Typography>
           )}
 
-          {error && (
+          {uploadError && (
             <Alert severity="error" sx={{ width: "100%", mb: 2 }}>
-              {error}
+              {uploadError}
             </Alert>
           )}
 
-          {success && (
+          {uploadSuccess && (
             <Alert severity="success" sx={{ width: "100%", mb: 2 }}>
-              {success}
+              {uploadSuccess}
             </Alert>
           )}
 
           <Button
             type="submit"
             variant="contained"
-            disabled={!file || uploading}
+            disabled={!file || isUploading}
             color="success"
             sx={{ minWidth: 200 }}
           >
-            {uploading ? (
+            {isUploading ? (
               <CircularProgress size={24} color="inherit" />
             ) : (
               "Upload PDF"
@@ -401,3 +433,7 @@ export default function AdminDashboard() {
     </Container>
   );
 }
+
+export default dynamic(() => Promise.resolve(AdminDashboardComponent), {
+  ssr: false,
+});

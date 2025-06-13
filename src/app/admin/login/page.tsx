@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
+import { useAuthRedirect } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { login } from "@/utils/api";
 import {
@@ -11,25 +13,58 @@ import {
   Button,
   Paper,
   Alert,
+  CircularProgress,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
-export default function AdminLoginPage() {
+function AdminLoginComponent() {
+  const { isCheckingAuth, isMounted } = useAuthRedirect();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
+    setError("");
+
     try {
       await login(email, password);
       console.log("login successful");
       router.push("/admin/dashboard");
-    } catch (err) {
-      setError("Invalid credentials");
+    } catch (err: any) {
+      console.error("Login error:", err);
+      setError(
+        err.response?.data?.error ||
+          err.response?.data?.message ||
+          "Invalid credentials"
+      );
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  // Don't render anything until mounted or while checking auth
+  if (!isMounted || isCheckingAuth) {
+    return (
+      <Container component="main" maxWidth="xs">
+        <Box
+          sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            minHeight: "50vh",
+          }}
+        >
+          <CircularProgress sx={{ color: "#0ff367" }} />
+        </Box>
+      </Container>
+    );
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -114,9 +149,14 @@ export default function AdminLoginPage() {
               fullWidth
               variant="contained"
               color="success"
+              disabled={isLoading}
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              {isLoading ? (
+                <CircularProgress size={24} sx={{ color: "#fff" }} />
+              ) : (
+                "Sign In"
+              )}
             </Button>
           </Box>
         </Paper>
@@ -124,3 +164,7 @@ export default function AdminLoginPage() {
     </Container>
   );
 }
+
+export default dynamic(() => Promise.resolve(AdminLoginComponent), {
+  ssr: false,
+});

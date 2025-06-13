@@ -2,19 +2,8 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
-  const token = request.cookies.get("token");
-  const isAdminRoute = request.nextUrl.pathname.startsWith("/admin");
-  const isLoginPage = request.nextUrl.pathname === "/admin/login";
-
-  if (isAdminRoute && !token && !isLoginPage) {
-    console.log("redirecting to login");
-    return NextResponse.redirect(new URL("/admin/login", request.url));
-  }
-
-  if (isLoginPage && token) {
-    return NextResponse.redirect(new URL("/admin/dashboard", request.url));
-  }
-
+  // Just allow all requests to pass through
+  // Authentication will be handled client-side in each protected component
   return NextResponse.next();
 }
 
