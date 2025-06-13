@@ -45,13 +45,6 @@ function PostHogPageview() {
 }
 
 export function PostHogProvider({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-
-  // Don't render PostHog provider for admin pages
-  if (pathname?.startsWith("/admin")) {
-    return <>{children}</>;
-  }
-
   return (
     <Provider client={posthog}>
       <Suspense fallback={null}>

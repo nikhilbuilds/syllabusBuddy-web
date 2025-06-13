@@ -5,8 +5,5 @@ if (typeof window !== "undefined") {
     api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
   });
 }
-console.log(
-  "process.env.NEXT_PUBLIC_POSTHOG_KEY",
-  process.env.NEXT_PUBLIC_POSTHOG_KEY
-);
+
 export default posthog;

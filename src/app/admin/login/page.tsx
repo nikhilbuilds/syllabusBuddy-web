@@ -24,6 +24,7 @@ export default function AdminLoginPage() {
     e.preventDefault();
     try {
       await login(email, password);
+      console.log("login successful");
       router.push("/admin/dashboard");
     } catch (err) {
       setError("Invalid credentials");
