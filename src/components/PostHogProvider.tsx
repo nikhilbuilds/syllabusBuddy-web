@@ -22,6 +22,11 @@ function PostHogPageview() {
   const pathname = usePathname();
 
   useEffect(() => {
+    // Skip analytics for admin pages
+    if (pathname?.startsWith("/admin")) {
+      return;
+    }
+
     if (pathname) {
       let url = window.origin + pathname;
       if (typeof window !== "undefined") {
@@ -40,6 +45,13 @@ function PostHogPageview() {
 }
 
 export function PostHogProvider({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+
+  // Don't render PostHog provider for admin pages
+  if (pathname?.startsWith("/admin")) {
+    return <>{children}</>;
+  }
+
   return (
     <Provider client={posthog}>
       <Suspense fallback={null}>
